@@ -1,0 +1,32 @@
+.data
+	vetor: 1, 2, 3, 4, 5
+	
+.text
+	la $t0, vetor
+	move $t1, $zero
+	
+	loop:
+		beq $t1, 5, proximo
+		lw $t2, 0($t0)
+		sw $t2, 0($sp)
+		addi $sp, $sp, -4
+		addi $t0, $t0, 4
+		addi $t1, $t1, 1
+		#beq $t1, 5, proximo
+		j loop
+		
+	proximo:
+		la $t0, vetor
+		addi $sp, $sp, 4
+		transcrever:
+			beq $t1, $zero, fim
+			lw $t2, 0($sp)
+			sw $t2, 0($t0)
+			addi $sp, $sp, 4
+			addi $t0, $t0, 4
+			addi $t1, $t1, -1
+			#beq $t1, $zero, fim
+			j transcrever
+	fim:
+		li $v0, 10
+		syscall

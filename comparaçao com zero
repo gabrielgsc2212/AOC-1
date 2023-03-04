@@ -1,0 +1,41 @@
+.data
+	inicio: .asciiz "Defina um valor: "
+	maior:	.asciiz "Este valor é maior que zero."
+	igual:	.asciiz "Este valor é igual a zero."
+	menor:	.asciiz "Este valor é menor que zero."
+	
+.text
+	li $v0, 4
+	la $a0, inicio
+	syscall
+	
+	li $v0, 5
+	syscall
+	
+	bgt $v0, $zero, ImprimeMaior
+	beq $v0, $zero, ImprimeIgual
+	blt $v0, $zero, ImprimeMenor
+	
+	li $v0, 10
+	syscall
+	
+	ImprimeMaior:
+		li $v0, 4
+		la $a0, maior
+		syscall
+		li $v0, 10
+		syscall
+		
+	ImprimeIgual:
+		li $v0, 4
+		la $a0, igual
+		syscall
+		li $v0, 10
+		syscall
+	ImprimeMenor:
+		li $v0, 4
+		la $a0, menor
+		syscall
+		
+		
+	

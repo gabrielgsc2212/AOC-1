@@ -1,0 +1,16 @@
+.data
+	vetor:	1, 2, 3, 4, 5
+
+.text
+	li $t0, 16
+	li $t1, -4
+	loop:
+		beq $t0, $t1, fim
+		lw $a0, vetor($t0)
+		li $v0, 1
+		syscall
+		addi $t0, $t0, -4
+		j loop
+	fim:
+		li $v0, 10
+		syscall
